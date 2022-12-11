@@ -34,11 +34,19 @@ class Enemy(Player):
     def __init__(self,speed,imagename,x,y):
         super().__init__(speed,imagename,x,y)
 
+    def update(self):
+        keys = key.get_pressed()
+        if keys[K_w]:
+            self.rect.y += 10
+
+        if keys[K_s]:
+            self.rect.y -= 10
 
 
 
-herom = Player(10,'dunlop-blackstorm-Ракетка-для-настольного-тенниса.jpg',500,500)
-en = Enemy(10,'dunlop-blackstorm-Ракетка-для-настольного-тенниса.jpg',0,0)
+ball = Player1(1, "S.png",500,475)
+herom = Player(10,'2.jpg',100,100)
+en = Enemy(10,'2.jpg',800,800)
 
 game = True
 while game:
@@ -46,9 +54,15 @@ while game:
         if e.type == QUIT:
             game = False
     window.blit(back,(0,0))
-    display.update()
-    clock.tick(FPS)
+    
+    
+    ball.update()
+    ball.reset()
     herom.reset()
     herom.update()
     en.reset()
     en.update()
+    clock.tick(FPS)
+    display.update()
+    
+    
